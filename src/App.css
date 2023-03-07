@@ -1,0 +1,50 @@
+:root {
+  --primary: #485fc7;
+  --primary-contrast: #dbdbdb;
+  --secondary: #6c757d;
+  --secondary-contrast: #dbdbdb;
+  --error: #ff3860;
+  --error-contrast: #dbdbdb;
+  --success: #23d160;
+  --success-contrast: #dbdbdb;
+  --warning: #ffdd57;
+  --warning-contrast: #dbdbdb;
+  --info: #209cee;
+  --info-contrast: #dbdbdb;
+  --bg: #fff;
+  --border-color: #dbdbdb;
+  --text-color: #4a4a4a;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.App {
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  border: 5px solid green;
+  flex-direction: column;
+  margin: 0 10%;
+}
+
+label {
+  display: block;
+}
+
+.select,
+.select select {
+  width: 100%;
+}

@@ -1,0 +1,49 @@
+{
+  "name": "sass",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "bulma": "^0.9.4",
+    "classnames": "^2.3.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "reset-css": "^5.0.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@emotion/babel-plugin": "^11.10.6",
+    "@emotion/eslint-plugin": "^11.10.0",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@types/uuid": "^9.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "@vitejs/plugin-react": "^3.1.0",
+    "eslint": "^8.35.0",
+    "eslint-plugin-react": "^7.32.2",
+    "postcss-styled-syntax": "^0.3.3",
+    "postcss-syntax": "^0.36.2",
+    "prettier": "^2.8.4",
+    "sass": "^1.58.3",
+    "stylelint": "^15.2.0",
+    "stylelint-config-prettier": "^9.0.4",
+    "stylelint-config-standard-scss": "^7.0.1",
+    "stylelint-prettier": "^3.0.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-stylelint": "^4.2.0",
+    "vite-plugin-transform-css-modules": "^1.0.3"
+  }
+}

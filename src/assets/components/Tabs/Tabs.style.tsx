@@ -1,6 +1,7 @@
 import { css, SerializedStyles, Theme } from '@emotion/react';
+
 import styled from '@emotion/styled';
-import { Alignment, TabProps, Sizes, TabItemProps, Variant } from './ITabs';
+import { Alignment, TabProps, Sizes, Variant } from './ITabs';
 import { ITabItemProps } from './TabsV3';
 
 const roundBorder = '0.375em';
@@ -17,59 +18,6 @@ const SIZE: { [key in keyof typeof Sizes]: string } = {
   'large': '1.5rem;',
 }
 
-export const Icon = styled.span()
-
-export const A = styled.a`
-  align-items: center;
-  border-bottom: 1px solid ${({ theme }) => theme.border.color};
-  color: ${({ theme }) => theme.text.color};
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  margin-bottom: -1px;
-  padding: 0.5em 1em;
-  vertical-align: top;
-`
-
-export const Ul = styled.ul<{ active?: boolean }>`
-  align-items: center;
-  border-bottom: 1px solid ${p => p.theme.border.color};
-  display: flex;
-  flex-grow: 1;
-  flex-shrink: 0;
-`
-
-const VariantLI: { [key in keyof typeof Variant]: (p: Pick<TabItemProps, 'active'> & Pick<TabProps, 'color'> & { theme: Theme }) => SerializedStyles | null } = {
-  'boxed': p => !p.active ? null : css`
-      ${A} {
-        background-color: ${p.theme.bg.color} !important;
-        border-color: ${p.theme.border.color} !important;
-        border-bottom-color: transparent !important;
-      }
-    `,
-  'toggle': p => !p.active ? null : css`
-    ${A}{
-        background-color: ${p.color ? p.theme.colors[p.color] : p.theme.colors.primary};
-        border-color: ${p.color ? p.theme.colors[p.color] : p.theme.colors.primary};
-        color: #fff;
-        z-index: 1;
-    }`,
-  'toggle-rounded': () => null,
-}
-
-export const Li = styled.li<Pick<ITabItemProps, "active" | "variant" > & Pick<TabProps, 'color'>>`
-  display: block;
-
-  ${(p) => p.active && css`
-    ${A} {
-      border-bottom-color: ${p.color ? p.theme.colors[p.color] : p.theme.colors.primary};
-      color: ${p.color ? p.theme.colors[p.color] : p.theme.colors.primary};
-    }
-  `}
-  ${p => p.variant === 'toggle-rounded' && VariantLI['toggle'](p)}
-  ${p => p.variant && VariantLI[p.variant](p)}
-`
-
 const VARIANT: { [key in keyof typeof Variant]: (p: { theme: Theme }) => SerializedStyles } = {
   'boxed': () => css`
     ${A} {
@@ -77,7 +25,7 @@ const VARIANT: { [key in keyof typeof Variant]: (p: { theme: Theme }) => Seriali
       border-radius: 4px 4px 0 0;
     }
   `,
-  'toggle': p => css`
+  'toggle': ({ theme }) => css`
     ${Ul} {
       border-bottom: none;
     }
@@ -95,14 +43,15 @@ const VARIANT: { [key in keyof typeof Variant]: (p: { theme: Theme }) => Seriali
     }
     
     ${A} {
-      border-color: ${p.theme.border.color};
+      border-color: ${theme.border.color};
       border-style: solid;
       border-width: 1px;
       margin-bottom: 0;
       position: relative;
     }
   `,
-  'toggle-rounded': () => css`
+  'toggle-rounded': ({ theme }) => css`
+    ${VARIANT['toggle']({ theme })}
     ${Li}:first-of-type ${A} {
       border-bottom-left-radius: 9999px;
       border-top-left-radius: 9999px;
@@ -116,6 +65,55 @@ const VARIANT: { [key in keyof typeof Variant]: (p: { theme: Theme }) => Seriali
     }
   `
 }
+
+const VARIANT_ACTIVE: { [key in keyof typeof Variant]: (p: Pick<TabProps, 'color'> & { theme: Theme }) => SerializedStyles } = {
+  'boxed': ({ theme }) => css`
+      background-color: ${theme.bg.color} !important;
+      border-color: ${theme.border.color} !important;
+      border-bottom-color: transparent !important;
+    `,
+  'toggle': ({ theme, color }) => css`
+    background-color: ${color ? theme.colors[color] : theme.colors.primary};
+    border-color: ${color ? theme.colors[color] : theme.colors.primary} !important;
+    color: #fff;
+    z-index: 1;
+  `,
+  'toggle-rounded': (p) => VARIANT_ACTIVE.toggle(p)
+}
+
+export const Icon = styled.span()
+
+export const A = styled.a`
+  align-items: center;
+  border-bottom: 1px solid ${({ theme }) => theme.border.color};
+  color: ${({ theme }) => theme.text.color};
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin-bottom: -1px;
+  padding: 0.5em 1em;
+  vertical-align: top;
+`
+
+export const Ul = styled.ul`
+  align-items: center;
+  border-bottom: 1px solid ${({ theme }) => theme.border.color};
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+`
+
+export const Li = styled.li<Pick<ITabItemProps, "active" | "variant"> & Pick<TabProps, 'color'>>`
+  display: block;
+
+  ${({ theme, active, color, variant }) => active && css`
+    ${A} {
+      border-bottom-color: ${color ? theme.colors[color] : theme.colors.primary};
+      color: ${color ? theme.colors[color] : theme.colors.primary};
+      ${variant && VARIANT_ACTIVE[variant]({ theme, color })}
+    }
+  `}
+`
 
 export const Tabs = styled.div<Partial<TabProps>>`
   -webkit-overflow-scrolling: touch;
@@ -138,7 +136,6 @@ export const Tabs = styled.div<Partial<TabProps>>`
     }
   `}
   
-  ${p => p.variant === 'toggle-rounded' && VARIANT['toggle'](p)}
   ${p => p.variant && VARIANT[p.variant](p)}
 
   ${p => p.fullwidth && css`

@@ -4,7 +4,7 @@
   "overrides": [
     {
       "customSyntax": "postcss-styled-syntax",
-      "files": ["**/*.style.jsx", "**/*.style.tsx"]
+      "files": ["**/*.style.(t|j)sx"]
     }
   ],
   "rules": {

@@ -67,7 +67,7 @@ function App() {
           <div className="column">
             <label htmlFor="alignment">Alignment:</label>
             <div className="select">
-              <select id="alignment" name="alignment" onChange={changeVariant} >
+              <select id="alignment" name="alignment" onChange={changeVariant}  value={modifiers.alignment}>
                 {Object.keys(Alignment).map(alignment => <option key={alignment} value={alignment} >{alignment}</option>)}
               </select>
             </div>
@@ -75,7 +75,7 @@ function App() {
           <div className="column">
             <label htmlFor="size">Size:</label>
             <div className="select">
-              <select id="size" name="size" onChange={changeVariant} >
+              <select id="size" name="size" onChange={changeVariant} value={modifiers.size} >
                 <option value="" ></option>
                 {Object.keys(Sizes).map(size => <option key={size} value={size} >{size}</option>)}
               </select>
@@ -84,7 +84,7 @@ function App() {
           <div className="column">
             <label htmlFor="variant">Variant:</label>
             <div className="select">
-              <select id="variant" name="variant" onChange={changeVariant} >
+              <select id="variant" name="variant" onChange={changeVariant} value={modifiers.variant} >
                 <option value="" ></option>
                 {Object.keys(Variant).map(variant => <option key={variant} value={variant} >{variant}</option>)}
               </select>

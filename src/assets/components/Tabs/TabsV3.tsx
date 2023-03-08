@@ -1,16 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { TabProps, TabItemProps } from "./ITabs";
 import * as S from './Tabs.style';
 
 export type ITabItemProps = TabItemProps & {
   onClick: (value: TabItemProps['value']) => void,
-  variant: TabProps['variant']
-  color?: TabProps['color']
+  color?: TabProps['color'],
+  variant?: TabProps['variant'],
 }
 
-export const TabItem = ({ icon: Icon, label, active, onClick, value, variant, color }: ITabItemProps) => (
-  <S.Li active={active} variant={variant} color={color} onClick={() => onClick(value)}>
+export const TabItem = ({ icon: Icon, label, active, onClick, value, ...props }: ITabItemProps) => (
+  <S.Li active={active} onClick={() => onClick(value)} {...props}>
     <S.A>
       {
         !Icon ? null :
@@ -24,26 +23,34 @@ export const TabItem = ({ icon: Icon, label, active, onClick, value, variant, co
 )
 
 
-export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, variant, fullwidth, color }: TabProps) => {
-
-  return !data.length ? null : (
+export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, variant, fullwidth, color, ...props }: TabProps) =>
+  !data.length ? null : (
     <S.Tabs
       alignment={alignment}
       size={size}
       variant={variant}
       fullwidth={fullwidth}
       color={color}
+      {...props}
     >
       <S.Ul>
         {
           data.map((props, index) => {
             const id = props.value || index;
-            return <TabItem color={color} value={id} variant={variant} {...props} active={props.active || id === value} onClick={onChange} key={id} />
+            const isActive = props.active || id === value;
+            return <TabItem
+              value={id}
+              {...props}
+              active={isActive}
+              onClick={onChange}
+              color={color}
+              variant={variant}
+              key={id}
+            />
           })
         }
       </S.Ul>
     </S.Tabs>
   );
-};
 
 export default Tabs;

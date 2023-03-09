@@ -23,6 +23,11 @@ const VARIANT: { [key in keyof typeof Variant]: (p: { theme: Theme }) => Seriali
     ${A} {
       border: 1px solid transparent;
       border-radius: 4px 4px 0 0;
+
+      &:hover {
+        background-color: #f5f5f5;
+        border-bottom-color: #dbdbdb;
+      }
     }
   `,
   'toggle': ({ theme }) => css`
@@ -48,6 +53,12 @@ const VARIANT: { [key in keyof typeof Variant]: (p: { theme: Theme }) => Seriali
       border-width: 1px;
       margin-bottom: 0;
       position: relative;
+
+      &:hover {
+        background-color: #f5f5f5;
+        border-color: #b5b5b5;
+        z-index: 2;
+      }
     }
   `,
   'toggle-rounded': ({ theme }) => css`
@@ -73,12 +84,15 @@ const VARIANT_ACTIVE: { [key in keyof typeof Variant]: (p: Pick<TabProps, 'color
       border-bottom-color: transparent !important;
     `,
   'toggle': ({ theme, color }) => css`
-    background-color: ${color ? theme.colors[color] : theme.colors.primary};
-    border-color: ${color ? theme.colors[color] : theme.colors.primary} !important;
+    &, &:hover{
+      background-color: ${color ? theme.colors[color] : theme.colors.primary};
+      border-color: ${color ? theme.colors[color] : theme.colors.primary};
+    }
+
     color: #fff;
     z-index: 1;
   `,
-  'toggle-rounded': (p) => VARIANT_ACTIVE.toggle(p)
+  'toggle-rounded': ({ theme, color }) => css`${VARIANT_ACTIVE.toggle({ theme, color })}`
 }
 
 export const Icon = styled.span()
@@ -93,6 +107,11 @@ export const A = styled.a`
   margin-bottom: -1px;
   padding: 0.5em 1em;
   vertical-align: top;
+
+  &:hover {
+    border-bottom-color: #363636;
+    color: #363636;
+  }
 `
 
 export const Ul = styled.ul`
@@ -107,7 +126,7 @@ export const Li = styled.li<Pick<ITabItemProps, "active" | "variant"> & Pick<Tab
   display: block;
 
   ${({ theme, active, color, variant }) => active && css`
-    ${A} {
+    ${A}${A} {
       border-bottom-color: ${color ? theme.colors[color] : theme.colors.primary};
       color: ${color ? theme.colors[color] : theme.colors.primary};
       ${variant && VARIANT_ACTIVE[variant]({ theme, color })}

@@ -1,0 +1,32 @@
+$primary: var(--primary);
+$primary-contrast: var(--primary-contrast);
+$secondary: var(--secondary);
+$secondary-contrast: var(--secondary-contrast);
+$error: var(--error);
+$error-contrast: var(--error-contrast);
+$success: var(--success);
+$success-contrast: var(--success-contrast);
+$warning: var(--warning);
+$warning-contrast: var(--warning-contrast);
+$info: var(--inf);
+$info-contrast: var(--info-contrast);
+$bg: var(--bg);
+$border-color: var(--border-color);
+$text-color: var(--text-color);
+$round-border: 0.375em;
+$colors: (
+  'primary': $primary,
+  'secondary': $secondary,
+  'error': $error,
+  'success': $success,
+  'warning': $warning,
+  'info': $info
+);
+$colors-contrast: (
+  'primary': $primary-contrast,
+  'secondary': $secondary-contrast,
+  'error': $error-contrast,
+  'success': $success-contrast,
+  'warning': $warning-contrast,
+  'info': $info-contrast
+);

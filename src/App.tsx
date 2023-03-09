@@ -1,15 +1,16 @@
 import { useState } from 'react'
-import './App.css'
-import { Alignment, Sizes, TabItemProps, TabProps, Variant } from './assets/components/Tabs'
+import './App.scss'
+import { Alignment, Sizes, TabItemProps, TabProps, Variant } from './components/Tabs'
 
-import Tabs from './assets/components/Tabs/Tabs';
-import TabsV2 from './assets/components/Tabs/TabsV2';
-import TabsV3 from './assets/components/Tabs/TabsV3';
+import Tabs from './components/Tabs/Tabs';
+import TabsV2 from './components/Tabs/TabsV2';
+import TabsV3 from './components/Tabs/TabsV3';
 import theme from './assets/themes/theme';
 import { faFileAlt, faFilm, faImage, faMusic } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuidv4 } from 'uuid';
 import { ThemeProvider } from '@emotion/react'
-import "reset-css";
+import 'bootstrap-css/lib/forms.css';
+import 'bootstrap-css/lib/grid.css';
 
 interface Modifiers {
   alignment: TabProps['alignment'],
@@ -53,6 +54,13 @@ function App() {
     color: undefined,
   });
 
+  const selects: [{ [x: string]: string }, keyof Modifiers, boolean?][] = [
+    [Alignment, 'alignment'],
+    [Sizes, 'size', true],
+    [Variant, 'variant', true],
+    [theme.colors, 'color', true],
+  ]
+
   const onChange = (value: TabItemProps['value']) => {
     setValue(value);
   }
@@ -63,56 +71,36 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <div className="columns">
-          <div className="column">
-            <label htmlFor="alignment">Alignment:</label>
-            <div className="select">
-              <select id="alignment" name="alignment" onChange={changeVariant}  value={modifiers.alignment}>
-                {Object.keys(Alignment).map(alignment => <option key={alignment} value={alignment} >{alignment}</option>)}
-              </select>
+        <form className="row">
+          {selects.map(([options, key, hasEmpty]) => (
+            <div className="form-group col" key={key}>
+              <div>
+                <label htmlFor={key}>{key}</label>
+                <select className="form-control" id={key} name={key} onChange={changeVariant} value={modifiers[key] as string} >
+                  {!hasEmpty ? null : <option value="" ></option>}
+                  {Object.keys(options).map(value => <option key={value} value={value}>{value}</option>)}
+                </select>
+              </div>
+            </div>)
+          )}
+          <div className="form-group col" style={{
+            display: 'flex',
+            alignItems: 'flex-end'
+          }}>
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" onChange={changeVariant} id="fullwidth" name="fullwidth" />
+              <label className="form-check-label" htmlFor="fullwidth">
+                Full Width
+              </label>
             </div>
           </div>
-          <div className="column">
-            <label htmlFor="size">Size:</label>
-            <div className="select">
-              <select id="size" name="size" onChange={changeVariant} value={modifiers.size} >
-                <option value="" ></option>
-                {Object.keys(Sizes).map(size => <option key={size} value={size} >{size}</option>)}
-              </select>
-            </div>
-          </div>
-          <div className="column">
-            <label htmlFor="variant">Variant:</label>
-            <div className="select">
-              <select id="variant" name="variant" onChange={changeVariant} value={modifiers.variant} >
-                <option value="" ></option>
-                {Object.keys(Variant).map(variant => <option key={variant} value={variant} >{variant}</option>)}
-              </select>
-            </div>
-          </div>
-          <div className="column">
-            <label htmlFor="color">Colors: WIP</label>
-            <div className="select">
-              <select id="color" name="color" onChange={changeVariant} >
-                <option value="" ></option>
-                {Object.keys(theme.colors).map(color => <option key={color} value={color} >{color}</option>)}
-              </select>
-            </div>
-          </div>
-          <div className="column">
-            <br/>
-            <label className="checkbox">
-              <input type="checkbox" name="fullwidth" onChange={changeVariant} />
-              fullwidth
-            </label>
-          </div>
-        </div>
+        </form>
 
-        <Tabs color={modifiers.color} alignment={modifiers.alignment} variant={modifiers.variant} size={modifiers.size} fullwidth={modifiers.fullwidth} data={data} onChange={onChange} value={value}></Tabs>
-        <TabsV2 color={modifiers.color} alignment={modifiers.alignment} variant={modifiers.variant} size={modifiers.size} fullwidth={modifiers.fullwidth} data={data} onChange={onChange} value={value}></TabsV2>
-        <TabsV3 color={modifiers.color} alignment={modifiers.alignment} variant={modifiers.variant} size={modifiers.size} fullwidth={modifiers.fullwidth} data={data} onChange={onChange} value={value}></TabsV3>
-      </div>
-    </ThemeProvider>
+        <Tabs {...modifiers} data={data} onChange={onChange} value={value}></Tabs>
+        <TabsV2 {...modifiers} data={data} onChange={onChange} value={value}></TabsV2>
+        <TabsV3 {...modifiers} data={data} onChange={onChange} value={value}></TabsV3>
+      </div >
+    </ThemeProvider >
   )
 }
 

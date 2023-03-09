@@ -48,3 +48,20 @@ label {
 .select select {
   width: 100%;
 }
+
+$primary: var(--primary);
+$primary-contrast: var(--primary-contrast);
+$secondary: var(--secondary);
+$secondary-contrast: var(--secondary-contrast);
+$error: var(--error);
+$error-contrast: var(--error-contrast);
+$success: var(--success);
+$success-contrast: var(--success-contrast);
+$warning: var(--warning);
+$warning-contrast: var(--warning-contrast);
+$info: var(--inf);
+$info-contrast: var(--info-contrast);
+$bg: var(--bg);
+$border-color: var(--border-color);
+$text-color: var(--text-color);
+$round-border: 0.375em;

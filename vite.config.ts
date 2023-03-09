@@ -13,4 +13,11 @@ export default defineConfig({
   }), stylelint({
     fix: true,
   }), eslint()],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "./src/assets/variables.scss";`
+      }
+    }
+  }
 })

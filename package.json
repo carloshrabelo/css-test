@@ -14,6 +14,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "bootstrap-css": "^4.0.0-alpha.5",
     "bulma": "^0.9.4",
     "classnames": "^2.3.2",
     "react": "^18.2.0",
@@ -32,7 +33,7 @@
     "@vitejs/plugin-react": "^3.1.0",
     "eslint": "^8.35.0",
     "eslint-plugin-react": "^7.32.2",
-    "postcss-styled-syntax": "^0.3.3",
+    "postcss-styled-syntax": "^0.4.0",
     "postcss-syntax": "^0.36.2",
     "prettier": "^2.8.4",
     "sass": "^1.58.3",
@@ -43,7 +44,7 @@
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
     "vite-plugin-eslint": "^1.8.1",
-    "vite-plugin-stylelint": "^4.2.0",
+    "vite-plugin-stylelint": "^4.3.0",
     "vite-plugin-transform-css-modules": "^1.0.3"
   }
 }

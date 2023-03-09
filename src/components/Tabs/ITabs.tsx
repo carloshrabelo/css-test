@@ -19,12 +19,22 @@ export enum Variant {
   'toggle-rounded' = 'is-toggle-rounded',
 }
 
+export enum Colors {
+  'primary'= 'is-primary',
+  'secondary'= 'is-secondary',
+  'error'= 'is-error',
+  'success'= 'is-success',
+  'warning'= 'is-warning',
+  'info'= 'is-info',
+}
+
 export interface TabItemProps {
   icon: IconDefinition,
   label: string,
   value?: number | string,
   active?: boolean,
 }
+
 
 export interface TabProps {
   data: TabItemProps[],

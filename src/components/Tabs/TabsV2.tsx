@@ -1,11 +1,13 @@
-import style from "./Tabs.module.scss";
+import className from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { TabProps, TabItemProps, Alignment, Sizes, Variant } from "./ITabs";
+
+import { TabProps, TabItemProps, Alignment, Sizes, Variant, Colors } from "./ITabs";
+import style from "./Tabs.module.scss";
 
 export const TabItem = ({ icon: Icon, label, active, onClick, value }: TabItemProps & {
   onClick: (value: TabItemProps['value']) => void
 }) => (
-  <li className={!active ? '' : style["is-active"]} onClick={() => onClick(value)}>
+  <li className={className({ [style["is-active"]]: active })} onClick={() => onClick(value)}>
     <a>
       {
         !Icon ? null :
@@ -19,15 +21,21 @@ export const TabItem = ({ icon: Icon, label, active, onClick, value }: TabItemPr
 )
 
 
-export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, variant, fullwidth }: TabProps) => {
+export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, variant, color, fullwidth }: TabProps) => {
 
-  const _alignment = Alignment[alignment]
-  const _sizes = size && Sizes[size] && style[Sizes[size]] || '';
-  const _variant = variant && Variant[variant] && style[Variant[variant]] || '';
   const toggleRounded: keyof typeof Variant = 'toggle-rounded';
- 
+
   return !data.length ? null : (
-    <div className={`${style.tabs} ${style[_alignment]} ${_sizes} ${_variant} ${!fullwidth ? '' : style['is-fullwidth']} ${variant !== toggleRounded ? '' : style[Variant.toggle]}`}>
+    <div className={className(style.tabs,
+      style[Alignment[alignment]],
+      size && style[Sizes[size]],
+      variant && style[Variant[variant]],
+      color && style[Colors[color]],
+      {
+        [style[Variant.toggle]]: variant === toggleRounded,
+        [style['is-fullwidth']]: fullwidth,
+      }
+    )}>
       <ul>
         {
           data.map((props, index) => {

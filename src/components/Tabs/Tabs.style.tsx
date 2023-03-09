@@ -79,9 +79,9 @@ const VARIANT: { [key in keyof typeof Variant]: (p: { theme: Theme }) => Seriali
 
 const VARIANT_ACTIVE: { [key in keyof typeof Variant]: (p: Pick<TabProps, 'color'> & { theme: Theme }) => SerializedStyles } = {
   'boxed': ({ theme }) => css`
-      background-color: ${theme.bg.color} !important;
-      border-color: ${theme.border.color} !important;
-      border-bottom-color: transparent !important;
+      background-color: ${theme.bg.color};
+      border-color: ${theme.border.color};
+      border-bottom-color: transparent;
     `,
   'toggle': ({ theme, color }) => css`
     &, &:hover{
@@ -157,7 +157,7 @@ export const Tabs = styled.div<Partial<TabProps>>`
   
   ${p => p.variant && VARIANT[p.variant](p)}
 
-  ${p => p.fullwidth && css`
+  ${p => p.full && css`
     ${Li} {
       flex-grow: 1;
       flex-shrink: 0;

@@ -14,10 +14,10 @@ import 'bootstrap-css/lib/grid.css';
 
 interface Modifiers {
   alignment: TabProps['alignment'],
-  size: TabProps['size'],
-  variant: TabProps['variant'],
-  fullwidth: TabProps['fullwidth'],
-  color: TabProps['color']
+  size?: TabProps['size'],
+  variant?: TabProps['variant'],
+  full?: TabProps['full'],
+  color?: TabProps['color']
 }
 
 const data: TabItemProps[] = [
@@ -41,16 +41,17 @@ const data: TabItemProps[] = [
     label: "Documents",
     value: uuidv4(),
   }
-].map((item, index) => ({ ...item, value: index }))
+]
+//.map((item, index) => ({ ...item, value: index }))
 
 function App() {
   const selected = +(Math.random() * data.length).toFixed();
-  const [value, setValue] = useState<TabItemProps['value']>(selected !== data.length ? selected : selected - 1);
+  const [value, setValue] = useState<TabItemProps['value']>(data[selected]['value']);
   const [modifiers, setModifiers] = useState<Modifiers>({
     alignment: 'left',
     size: undefined,
     variant: undefined,
-    fullwidth: false,
+    full: false,
     color: undefined,
   });
 
@@ -70,7 +71,12 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div className="App" style={{
+        borderColor: modifiers.color && theme.colors[modifiers.color] || theme.colors.primary,
+        ...(!modifiers.color ? {} : {
+          boxShadow: `0 0.5rem 1rem ${theme.colors[modifiers.color]}, inset 0 -1px 0 ${theme.colors[modifiers.color]}`
+        }),
+      }}>
         <form className="row">
           {selects.map(([options, key, hasEmpty]) => (
             <div className="form-group col" key={key}>
@@ -84,12 +90,12 @@ function App() {
             </div>)
           )}
           <div className="form-group col" style={{
-            display: 'flex',
-            alignItems: 'flex-end'
+            display: 'grid',
+            alignItems: 'end'
           }}>
             <div className="form-check">
-              <input className="form-check-input" type="checkbox" onChange={changeVariant} id="fullwidth" name="fullwidth" />
-              <label className="form-check-label" htmlFor="fullwidth">
+              <input className="form-check-input" type="checkbox" onChange={changeVariant} id="full" name="full" />
+              <label htmlFor="full">
                 Full Width
               </label>
             </div>

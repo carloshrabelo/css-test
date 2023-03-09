@@ -19,7 +19,7 @@ export const TabItem = ({ icon: Icon, label, active, onClick, value }: TabItemPr
 )
 
 
-export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, variant, color, fullwidth }: TabProps) => {
+export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, variant, color, full }: TabProps) => {
 
   const _alignment = Alignment[alignment]
   const _sizes = size && Sizes[size] && style[Sizes[size]] || '';
@@ -28,7 +28,7 @@ export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, var
   const toggleRounded: keyof typeof Variant = 'toggle-rounded';
  
   return !data.length ? null : (
-    <div className={`${style.tabs} ${style[_alignment]} ${_sizes} ${_variant} ${_color} ${!fullwidth ? '' : style['is-fullwidth']} ${variant !== toggleRounded ? '' : style[Variant.toggle]}`}>
+    <div className={`${style.tabs} ${style[_alignment]} ${_sizes} ${_variant} ${_color} ${!full ? '' : style['is-full']} ${variant !== toggleRounded ? '' : style[Variant.toggle]}`}>
       <ul>
         {
           data.map((props, index) => {

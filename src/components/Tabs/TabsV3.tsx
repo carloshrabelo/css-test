@@ -23,13 +23,13 @@ export const TabItem = ({ icon: Icon, label, active, onClick, value, ...props }:
 )
 
 
-export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, variant, fullwidth, color, ...props }: TabProps) =>
+export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, variant, full, color, ...props }: TabProps) =>
   !data.length ? null : (
     <S.Tabs
       alignment={alignment}
       size={size}
       variant={variant}
-      fullwidth={fullwidth}
+      full={full}
       color={color}
       {...props}
     >

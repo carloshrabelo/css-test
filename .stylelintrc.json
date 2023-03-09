@@ -12,6 +12,7 @@
     "alpha-value-notation": "number",
     "selector-class-pattern": null,
     "no-descending-specificity": null,
-    "no-invalid-double-slash-comments": null
+    "no-invalid-double-slash-comments": null,
+    "scss/no-global-function-names": null
   }
 }

@@ -43,6 +43,6 @@ export interface TabProps {
   alignment?: keyof typeof Alignment,
   size?: keyof typeof Sizes,
   variant?: keyof typeof Variant,
-  fullwidth?: boolean
+  full?: boolean
   color?: keyof Theme['colors']
 }

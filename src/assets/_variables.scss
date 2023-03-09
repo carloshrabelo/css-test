@@ -8,12 +8,20 @@ $success: var(--success);
 $success-contrast: var(--success-contrast);
 $warning: var(--warning);
 $warning-contrast: var(--warning-contrast);
-$info: var(--inf);
+$info: var(--info);
 $info-contrast: var(--info-contrast);
-$bg: var(--bg);
-$border-color: var(--border-color);
+
 $text-color: var(--text-color);
+
+$bg: var(--bg);
+$bg-hover: var(--bg-hover);
+
+$border-color: var(--border-color);
+$border-color-hover: var(--border-color-hover);
+$border-color-hover-strong: var(--border-color-hover-strong);
+
 $round-border: 0.375em;
+
 $colors: (
   'primary': $primary,
   'secondary': $secondary,
@@ -22,6 +30,7 @@ $colors: (
   'warning': $warning,
   'info': $info
 );
+
 $colors-contrast: (
   'primary': $primary-contrast,
   'secondary': $secondary-contrast,

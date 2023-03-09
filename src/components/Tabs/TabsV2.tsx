@@ -21,7 +21,7 @@ export const TabItem = ({ icon: Icon, label, active, onClick, value }: TabItemPr
 )
 
 
-export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, variant, color, fullwidth }: TabProps) => {
+export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, variant, color, full }: TabProps) => {
 
   const toggleRounded: keyof typeof Variant = 'toggle-rounded';
 
@@ -33,7 +33,7 @@ export const Tabs = ({ data = [], onChange, value, alignment = 'left', size, var
       color && style[Colors[color]],
       {
         [style[Variant.toggle]]: variant === toggleRounded,
-        [style['is-fullwidth']]: fullwidth,
+        [style['is-full']]: full,
       }
     )}>
       <ul>
